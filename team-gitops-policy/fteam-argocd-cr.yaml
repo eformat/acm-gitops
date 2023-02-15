@@ -47,15 +47,6 @@ spec:
         enabled: false
       route:
         enabled: false
-  repositoryCredentials: |
-    - url: https://gitlab-ce.apps.sno.sandbox205.opentlc.com
-      type: git
-      passwordSecret:
-        key: password
-        name: git-auth
-      usernameSecret:
-        key: username
-        name: git-auth
   rbac:
     defaultPolicy: 'role:admin'
     policy: |
