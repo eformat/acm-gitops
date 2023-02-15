@@ -4,8 +4,18 @@ kind: PolicyGenerator
 metadata:
   name: install-openshift-gitops
 policyDefaults:
-  namespace: open-cluster-management-global-set
+  placement:
+    placementName: placement-all-openshift
   remediationAction: enforce
+  configurationPolicyAnnotations: {"policy.open-cluster-management.io/disable-templates": "true"}
+  categories:
+    - CM Configuration Management
+  controls: 
+    - CM-2 Baseline Configuration
+  namespace: open-cluster-management-global-set
+  severity: medium
+  standards:
+    - generic
 policies:
   - name: fteam-gitops
     manifests:
