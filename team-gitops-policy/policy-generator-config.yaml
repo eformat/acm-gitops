@@ -9,4 +9,4 @@ policyDefaults:
 policies:
   - name: fteam-gitops
     manifests:
-      - path: argocd-cr.yaml
+      - path: fteam-argocd-cr.yaml

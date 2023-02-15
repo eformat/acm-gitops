@@ -24,7 +24,7 @@ metadata:
 spec:
   argoServer:
     cluster: local-cluster
-    argoNamespace: open-cluster-management-global-set 
+    argoNamespace: open-cluster-management-global-set
   placementRef:
     kind: Placement
     apiVersion: cluster.open-cluster-management.io/v1beta1
