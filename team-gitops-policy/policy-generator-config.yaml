@@ -2,7 +2,7 @@
 apiVersion: policy.open-cluster-management.io/v1
 kind: PolicyGenerator
 metadata:
-  name: install-openshift-gitops
+  name: argocd
 policyDefaults:
   placement:
     placementName: placement-all-openshift
