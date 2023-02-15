@@ -1,7 +1,6 @@
 
 resources:
   - fteam-gitops.yaml
-  - fteam-argocd-cr.yaml
 
 generators:
   - policy-generator-config.yaml
