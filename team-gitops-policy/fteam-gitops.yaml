@@ -7,7 +7,7 @@ metadata:
 spec:
   argoServer:
     cluster: local-cluster
-    argoNamespace: open-cluster-management-global-set 
+    argoNamespace: fteam-ci-cd
   placementRef:
     kind: Placement
     apiVersion: cluster.open-cluster-management.io/v1beta1
