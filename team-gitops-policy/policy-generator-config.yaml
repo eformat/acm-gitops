@@ -1,0 +1,12 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: install-openshift-gitops
+policyDefaults:
+  namespace: open-cluster-management-global-set
+  remediationAction: enforce
+policies:
+  - name: fteam-gitops
+    manifests:
+      - path: argocd-cr.yaml

@@ -1,0 +1,127 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ArgoCD
+metadata:
+  name: argocd
+  finalizers:
+    - argoproj.io/finalizer
+  labels:
+    app: argocd
+    app.kubernetes.io/managed-by: Helm
+spec:
+  server:
+    autoscale:
+      enabled: false
+    grpc:
+      ingress:
+        enabled: false
+    ingress:
+      enabled: false
+    route:
+      enabled: true
+      tls:
+        termination: reencrypt
+    service:
+      type: ''
+  grafana:
+    enabled: false
+    ingress:
+      enabled: false
+    route:
+      enabled: false
+  notifications:
+    enabled: true
+  prometheus:
+    enabled: false
+    ingress:
+      enabled: false
+    route:
+      enabled: false
+  initialSSHKnownHosts: {}
+  initialRepositories: {}
+  statusBadgeEnabled: true
+  applicationInstanceLabelKey: rht-gitops.com/fteam-ci-cd
+  applicationSet:
+    webhookServer:
+      ingress:
+        enabled: false
+      route:
+        enabled: false
+  repositoryCredentials: |
+    - url: https://gitlab-ce.apps.sno.sandbox205.opentlc.com
+      type: git
+      passwordSecret:
+        key: password
+        name: git-auth
+      usernameSecret:
+        key: username
+        name: git-auth
+  rbac:
+    defaultPolicy: 'role:admin'
+    policy: |
+      g, system:cluster-admins, role:admin
+    scopes: '[groups]'
+  repo:
+    initContainers:
+      - args:
+          - >-
+            curl -Lo /tmp/argocd-vault-plugin
+            https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v${AVP_VERSION}/argocd-vault-plugin_${AVP_VERSION}_linux_amd64
+            && chmod +x /tmp/argocd-vault-plugin && mv /tmp/argocd-vault-plugin
+            /custom-tools/
+        command:
+          - sh
+          - '-c'
+        env:
+          - name: AVP_VERSION
+            value: 1.13.1
+        image: 'registry.access.redhat.com/ubi8/ubi-minimal:latest'
+        name: download-tools
+        resources: {}
+        volumeMounts:
+          - mountPath: /custom-tools
+            name: custom-tools
+    mountsatoken: true
+    serviceaccount: vault
+    volumeMounts:
+      - mountPath: /usr/local/bin/argocd-vault-plugin
+        name: custom-tools
+        subPath: argocd-vault-plugin
+    volumes:
+      - emptyDir: {}
+        name: custom-tools
+  resourceExclusions: |
+    - apiGroups:
+        - tekton.dev
+      clusters:
+        - '*'
+      kinds:
+        - TaskRun
+        - PipelineRun
+  dex:
+    openShiftOAuth: true
+  version: v2.5.9
+  ha:
+    enabled: false
+  tls:
+    ca: {}
+  redis: {}
+  configManagementPlugins: |
+    - name: argocd-vault-plugin
+      generate:
+        command: ["sh", "-c"]
+        args: ["argocd-vault-plugin -s fteam-ci-cd:team-avp-credentials generate ./"]
+    - name: argocd-vault-plugin-helm
+      init:
+        command: [sh, -c]
+        args: ["helm dependency build"]
+      generate:
+        command: ["bash", "-c"]
+        args: ['helm template "$ARGOCD_APP_NAME" -n "$ARGOCD_APP_NAMESPACE" -f <(echo "$ARGOCD_ENV_HELM_VALUES") . | argocd-vault-plugin generate -s fteam-ci-cd:team-avp-credentials -']
+    - name: argocd-vault-plugin-kustomize
+      generate:
+        command: ["sh", "-c"]
+        args: ["kustomize build . | argocd-vault-plugin -s fteam-ci-cd:team-avp-credentials generate -"]
+  controller:
+    processors: {}
+    sharding: {}

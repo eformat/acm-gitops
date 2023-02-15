@@ -1,0 +1,6 @@
+
+resources:
+  - fteam-gitops.yaml
+
+generators:
+  - policy-generator-config.yaml
