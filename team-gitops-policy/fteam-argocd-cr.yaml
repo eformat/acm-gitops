@@ -7,6 +7,28 @@ metadata:
   labels:
     app: argocd
 spec:
+  # This enables the application set controller
+  applicationSet: {}
+  # This enables the ArgoCD instance to use OpenShift OAuth
+  dex:
+    openShiftOAuth: true
+  resourceExclusions: |
+    - apiGroups:
+      - tekton.dev
+      clusters:
+      - '*'
+      kinds:
+      - TaskRun
+      - PipelineRun
+  tls:
+    ca: {}
+  groups:
+    - default
+  rbac:
+    defaultPolicy: 'role:readonly'
+    policy: |
+      g, cluster-admins, role:admin
+    scopes: '[groups]'
   server:
     autoscale:
       enabled: false
@@ -21,34 +43,12 @@ spec:
         termination: reencrypt
     service:
       type: ''
-  grafana:
-    enabled: false
-    ingress:
-      enabled: false
-    route:
-      enabled: false
+  tls:
+    ca: {}
   notifications:
     enabled: true
-  prometheus:
-    enabled: false
-    ingress:
-      enabled: false
-    route:
-      enabled: false
-  initialSSHKnownHosts: {}
   statusBadgeEnabled: true
   applicationInstanceLabelKey: rht-gitops.com/fteam-ci-cd
-  applicationSet:
-    webhookServer:
-      ingress:
-        enabled: false
-      route:
-        enabled: false
-  rbac:
-    defaultPolicy: 'role:admin'
-    policy: |
-      g, system:cluster-admins, role:admin
-    scopes: '[groups]'
   repo:
     initContainers:
       - args:
@@ -91,9 +91,6 @@ spec:
   version: v2.5.9
   ha:
     enabled: false
-  tls:
-    ca: {}
-  redis: {}
   configManagementPlugins: |
     - name: argocd-vault-plugin
       generate:
@@ -110,9 +107,6 @@ spec:
       generate:
         command: ["sh", "-c"]
         args: ["kustomize build . | argocd-vault-plugin -s fteam-ci-cd:team-avp-credentials generate -"]
-  controller:
-    processors: {}
-    sharding: {}
 ---
 apiVersion: v1
 kind: ServiceAccount
