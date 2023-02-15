@@ -125,3 +125,9 @@ spec:
   controller:
     processors: {}
     sharding: {}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: vault
+  namespace: fteam-ci-cd
