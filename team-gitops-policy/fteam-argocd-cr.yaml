@@ -4,11 +4,8 @@ kind: ArgoCD
 metadata:
   name: argocd
   namespace: fteam-ci-cd
-  finalizers:
-    - argoproj.io/finalizer
   labels:
     app: argocd
-    app.kubernetes.io/managed-by: Helm
 spec:
   server:
     autoscale:
