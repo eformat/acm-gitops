@@ -39,7 +39,6 @@ spec:
     route:
       enabled: false
   initialSSHKnownHosts: {}
-  initialRepositories: {}
   statusBadgeEnabled: true
   applicationInstanceLabelKey: rht-gitops.com/fteam-ci-cd
   applicationSet:
