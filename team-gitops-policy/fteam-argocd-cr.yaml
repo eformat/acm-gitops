@@ -76,11 +76,7 @@ spec:
     volumes:
       - emptyDir: {}
         name: custom-tools
-  dex:
-    openShiftOAuth: true
   version: v2.5.9
-  ha:
-    enabled: false
   configManagementPlugins: |
     - name: argocd-vault-plugin
       generate:
