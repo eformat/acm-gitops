@@ -3,16 +3,18 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: PolicyGenerator
 metadata:
   name: argocd-teams
+placementBindingDefaults:
+  name: argocd-teams
 policyDefaults:
   placement:
     placementName: placement-all-openshift
-  remediationAction: enforce
   configurationPolicyAnnotations: {"policy.open-cluster-management.io/disable-templates": "true"}
   categories:
     - CM Configuration Management
   controls: 
     - CM-2 Baseline Configuration
   namespace: open-cluster-management-global-set
+  remediationAction: enforce
   severity: medium
   standards:
     - generic
