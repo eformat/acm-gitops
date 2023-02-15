@@ -21,4 +21,4 @@ policyDefaults:
 policies:
   - name: fteam-gitops
     manifests:
-      - path: fteam
+      - path: fteam-argocd-cr.yaml
