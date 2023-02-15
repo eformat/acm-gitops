@@ -146,5 +146,5 @@ roleRef:
   name: cluster-admin
 subjects:
 - kind: ServiceAccount
-  name: openshift-gitops-argocd-application-controller
+  name: global-policy-argocd-application-controller
   namespace: open-cluster-management-global-set
