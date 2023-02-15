@@ -8,7 +8,6 @@ placementBindingDefaults:
 policyDefaults:
   placement:
     placementName: placement-all-openshift
-  configurationPolicyAnnotations: {"policy.open-cluster-management.io/disable-templates": "true"}
   categories:
     - CM Configuration Management
   complianceType: "musthave"
