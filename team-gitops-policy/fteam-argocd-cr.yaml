@@ -43,8 +43,6 @@ spec:
         termination: reencrypt
     service:
       type: ''
-  tls:
-    ca: {}
   notifications:
     enabled: true
   statusBadgeEnabled: true
@@ -78,14 +76,6 @@ spec:
     volumes:
       - emptyDir: {}
         name: custom-tools
-  resourceExclusions: |
-    - apiGroups:
-        - tekton.dev
-      clusters:
-        - '*'
-      kinds:
-        - TaskRun
-        - PipelineRun
   dex:
     openShiftOAuth: true
   version: v2.5.9
