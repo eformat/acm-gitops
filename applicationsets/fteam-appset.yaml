@@ -10,7 +10,7 @@ spec:
         configMapRef: acm-placement
         labelSelector:
           matchLabels:
-            cluster.open-cluster-management.io/placement: placement-team-argo
+            cluster.open-cluster-management.io/placement: placement-all-openshift
         requeueAfterSeconds: 180
   syncPolicy:
     preserveResourcesOnDeletion: false
@@ -22,7 +22,7 @@ spec:
     spec:
       project: default
       destination:
-        server: "{{server}}"
+        server: "{{.url}}"
         namespace: fteam-ci-cd
       source:
         repoURL: https://github.com/eformat/acm-gitops.git
