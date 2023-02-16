@@ -17,7 +17,7 @@ policyDefaults:
   disabled: false
   namespace: open-cluster-management-global-set
   remediationAction: enforce
-  pruneObjectBehavior: "DeleteIfCreated"
+  pruneObjectBehavior: "DeleteAll"
   severity: medium
   standards:
     - generic
