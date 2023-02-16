@@ -19,6 +19,8 @@ spec:
         velero.io/exclude-from-backup: "true"
       annotations:
         argocd.argoproj.io/compare-options: IgnoreExtraneous
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
     spec:
       destination:
         namespace: fteam-ci-cd
