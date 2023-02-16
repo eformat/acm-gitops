@@ -10,25 +10,23 @@ spec:
         configMapRef: acm-placement
         labelSelector:
           matchLabels:
-            cluster.open-cluster-management.io/placement: placement-all-openshift
+            cluster.open-cluster-management.io/placement: placement-team-argo
         requeueAfterSeconds: 180
   syncPolicy:
     preserveResourcesOnDeletion: false
   template:
     metadata:
       name: fteam-{{name}}
-      labels:
-        velero.io/exclude-from-backup: "true"
       annotations:
         argocd.argoproj.io/compare-options: IgnoreExtraneous
     spec:
-      destination:
-        namespace: fteam-ci-cd
-        server: "{{server}}"
       project: default
+      destination:
+        server: "{{.url}}"
+        namespace: fteam-ci-cd
       source:
-        path: team-gitops-policy
         repoURL: https://github.com/eformat/acm-gitops.git
+        path: team-gitops-policy
         targetRevision: main
       syncPolicy:
         automated:
