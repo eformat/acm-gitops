@@ -22,7 +22,7 @@ spec:
     spec:
       project: default
       destination:
-        server: "{{.url}}"
+        server: "{{server}}"
         namespace: fteam-ci-cd
       source:
         repoURL: https://github.com/eformat/acm-gitops.git
