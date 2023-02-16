@@ -1,0 +1,3 @@
+resources:
+- zteam-gitops.yaml
+- zteam-argocd-cr.yaml

@@ -1,0 +1,105 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: zteam-ci-cd
+spec: {}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: vault
+  namespace: zteam-ci-cd
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ArgoCD
+metadata:
+  name: argocd
+  namespace: zteam-ci-cd
+  labels:
+    app: argocd
+spec:
+  # This enables the application set controller
+  applicationSet: {}
+  # This enables the ArgoCD instance to use OpenShift OAuth
+  dex:
+    openShiftOAuth: true
+  resourceExclusions: |
+    - apiGroups:
+      - tekton.dev
+      clusters:
+      - '*'
+      kinds:
+      - TaskRun
+      - PipelineRun
+  tls:
+    ca: {}
+  rbac:
+    defaultPolicy: 'role:readonly'
+    policy: |
+      g, cluster-admins, role:admin
+    scopes: '[groups]'
+  server:
+    autoscale:
+      enabled: false
+    grpc:
+      ingress:
+        enabled: false
+    ingress:
+      enabled: false
+    route:
+      enabled: true
+      tls:
+        termination: reencrypt
+    service:
+      type: ''
+  notifications:
+    enabled: true
+  statusBadgeEnabled: true
+  applicationInstanceLabelKey: rht-gitops.com/fteam-ci-cd
+  repo:
+    initContainers:
+      - args:
+          - >-
+            curl -Lo /tmp/argocd-vault-plugin
+            https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v${AVP_VERSION}/argocd-vault-plugin_${AVP_VERSION}_linux_amd64
+            && chmod +x /tmp/argocd-vault-plugin && mv /tmp/argocd-vault-plugin
+            /custom-tools/
+        command:
+          - sh
+          - '-c'
+        env:
+          - name: AVP_VERSION
+            value: 1.13.1
+        image: 'registry.access.redhat.com/ubi8/ubi-minimal:latest'
+        name: download-tools
+        resources: {}
+        volumeMounts:
+          - mountPath: /custom-tools
+            name: custom-tools
+    mountsatoken: true
+    serviceaccount: vault
+    volumeMounts:
+      - mountPath: /usr/local/bin/argocd-vault-plugin
+        name: custom-tools
+        subPath: argocd-vault-plugin
+    volumes:
+      - emptyDir: {}
+        name: custom-tools
+  version: v2.5.11
+  configManagementPlugins: |
+    - name: argocd-vault-plugin
+      generate:
+        command: ["sh", "-c"]
+        args: ["argocd-vault-plugin -s fteam-ci-cd:team-avp-credentials generate ./"]
+    - name: argocd-vault-plugin-helm
+      init:
+        command: [sh, -c]
+        args: ["helm dependency build"]
+      generate:
+        command: ["bash", "-c"]
+        args: ['helm template "$ARGOCD_APP_NAME" -n "$ARGOCD_APP_NAMESPACE" -f <(echo "$ARGOCD_ENV_HELM_VALUES") . | argocd-vault-plugin generate -s fteam-ci-cd:team-avp-credentials -']
+    - name: argocd-vault-plugin-kustomize
+      generate:
+        command: ["sh", "-c"]
+        args: ["kustomize build . | argocd-vault-plugin -s fteam-ci-cd:team-avp-credentials generate -"]
