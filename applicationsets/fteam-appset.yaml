@@ -19,6 +19,8 @@ spec:
       name: fteam-{{name}}
       annotations:
         argocd.argoproj.io/compare-options: IgnoreExtraneous
+      finalizers:
+      - argoproj.io/finalizer
     spec:
       project: default
       destination:
