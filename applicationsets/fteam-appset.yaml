@@ -31,9 +31,9 @@ spec:
         repoURL: https://github.com/eformat/acm-gitops.git
         targetRevision: main
       syncPolicy:
+        preserveResourcesOnDeletion: false
         automated:
           prune: false
           selfHeal: true
-          preserveResourcesOnDeletion: false
         syncOptions:
           - CreateNamespace=true
