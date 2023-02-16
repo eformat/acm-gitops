@@ -26,5 +26,3 @@ policies:
   - name: fteam-gitops
     manifests:
       - path: fteam-argocd-cr.yaml
-        pruneObjectBehavior: "DeleteAll"
-    pruneObjectBehavior: "DeleteAll"
