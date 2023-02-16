@@ -4,8 +4,6 @@ kind: ApplicationSet
 metadata:
   name: fteam
   namespace: open-cluster-management-global-set
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   generators:
     - clusterDecisionResource:
@@ -38,4 +36,3 @@ spec:
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
-          - PruneLast=true
