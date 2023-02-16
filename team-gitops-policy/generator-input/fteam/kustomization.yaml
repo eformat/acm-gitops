@@ -1,0 +1,3 @@
+resources:
+- fteam-gitops.yaml
+- fteam-argocd-cr.yaml
