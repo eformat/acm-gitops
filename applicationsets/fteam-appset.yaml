@@ -21,7 +21,6 @@ spec:
         argocd.argoproj.io/compare-options: IgnoreExtraneous
       finalizers:
       - resources-finalizer.argocd.argoproj.io
-      - argoproj.io/finalizer
     spec:
       project: default
       destination:

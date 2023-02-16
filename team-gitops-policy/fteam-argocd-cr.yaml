@@ -8,7 +8,6 @@ metadata:
     app: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
-  - argoproj.io/finalizer
 spec:
   # This enables the application set controller
   applicationSet: {}
