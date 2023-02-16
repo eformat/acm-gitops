@@ -17,7 +17,6 @@ policyDefaults:
   disabled: false
   namespace: open-cluster-management-global-set
   remediationAction: enforce
-  pruneObjectBehavior: "DeleteAll"
   severity: medium
   standards:
     - generic
@@ -26,3 +25,4 @@ policies:
   - name: fteam-gitops
     manifests:
       - path: fteam-argocd-cr.yaml
+      pruneObjectBehavior: "DeleteAll"
