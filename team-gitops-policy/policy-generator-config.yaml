@@ -13,7 +13,7 @@ policyDefaults:
   complianceType: "musthave"
   controls: 
     - CM-2 Baseline Configuration
-  consolidateManifests: true
+  consolidateManifests: false
   disabled: false
   namespace: open-cluster-management-global-set
   pruneObjectBehavior: "DeleteAll"
