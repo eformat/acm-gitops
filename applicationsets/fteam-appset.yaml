@@ -13,7 +13,7 @@ spec:
             cluster.open-cluster-management.io/placement: placement-all-openshift
         requeueAfterSeconds: 180
   syncPolicy:
-    preserveResourcesOnDeletion: true
+    preserveResourcesOnDeletion: false
   template:
     metadata:
       name: fteam-{{name}}
@@ -21,8 +21,6 @@ spec:
         velero.io/exclude-from-backup: "true"
       annotations:
         argocd.argoproj.io/compare-options: IgnoreExtraneous
-      finalizers:
-        - resources-finalizer.argocd.argoproj.io
     spec:
       destination:
         namespace: fteam-ci-cd

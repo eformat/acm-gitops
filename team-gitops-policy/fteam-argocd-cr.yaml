@@ -6,6 +6,8 @@ metadata:
   namespace: fteam-ci-cd
   labels:
     app: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   # This enables the application set controller
   applicationSet: {}
