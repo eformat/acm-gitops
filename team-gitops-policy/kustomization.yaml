@@ -1,7 +1,6 @@
 
 resources:
   - placement.yaml
-  - fteam-gitops.yaml
 
 generators:
   - policy-generator-config.yaml

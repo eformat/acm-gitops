@@ -23,6 +23,6 @@ policyDefaults:
     - generic
   policyAnnotations: {"argocd.argoproj.io/compare-options": "IgnoreExtraneous"}
 policies:
-  - name: fteam-gitops
+  - name: team-gitops
     manifests:
-      - path: fteam-argocd-cr.yaml
+      - path: generator-input/
