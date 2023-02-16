@@ -12,6 +12,8 @@ spec:
           matchLabels:
             cluster.open-cluster-management.io/placement: placement-all-openshift
         requeueAfterSeconds: 180
+  syncPolicy:
+    preserveResourcesOnDeletion: true
   template:
     metadata:
       name: fteam-{{name}}
@@ -31,7 +33,6 @@ spec:
         repoURL: https://github.com/eformat/acm-gitops.git
         targetRevision: main
       syncPolicy:
-        preserveResourcesOnDeletion: false
         automated:
           prune: false
           selfHeal: true
