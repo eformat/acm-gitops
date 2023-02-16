@@ -25,4 +25,4 @@ policies:
   - name: fteam-gitops
     manifests:
       - path: fteam-argocd-cr.yaml
-    pruneObjectBehavior: "DeleteIfCreated"
+        pruneObjectBehavior: "DeleteIfCreated"
