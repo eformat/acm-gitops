@@ -5,6 +5,7 @@ metadata:
   name: fteam
   namespace: open-cluster-management-global-set
 spec:
+  goTemplate: true
   generators:
     - clusterDecisionResource:
         configMapRef: acm-placement
@@ -16,15 +17,13 @@ spec:
     preserveResourcesOnDeletion: false
   template:
     metadata:
-      name: fteam-{{name}}
+      name: fteam-{{.name}}
       annotations:
         argocd.argoproj.io/compare-options: IgnoreExtraneous
-      finalizers:
-      - resources-finalizer.argocd.argoproj.io
     spec:
       project: default
       destination:
-        server: "{{server}}"
+        server: "{{.server}}"
         namespace: fteam-ci-cd
       source:
         repoURL: https://github.com/eformat/acm-gitops.git
