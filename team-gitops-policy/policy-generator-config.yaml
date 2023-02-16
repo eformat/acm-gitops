@@ -6,6 +6,8 @@ metadata:
 placementBindingDefaults:
   name: argocd-teams
 policyDefaults:
+  placement:
+    placementName: placement-team-argo
   categories:
     - CM Configuration Management
   complianceType: "musthave"
@@ -23,6 +25,4 @@ policyDefaults:
 policies:
   - name: fteam-gitops
     manifests:
-      - path: manifests
-    placement:
-      placementName: placement-team-argo
+      - path: fteam-argocd-cr.yaml
