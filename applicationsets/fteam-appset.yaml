@@ -4,8 +4,6 @@ kind: ApplicationSet
 metadata:
   name: fteam
   namespace: open-cluster-management-global-set
-  annotations:
-    argocd.argoproj.io/compare-options: IgnoreExtraneous
 spec:
   generators:
     - clusterDecisionResource:
@@ -19,6 +17,8 @@ spec:
       name: fteam-{{name}}
       labels:
         velero.io/exclude-from-backup: "true"
+      annotations:
+        argocd.argoproj.io/compare-options: IgnoreExtraneous
     spec:
       destination:
         namespace: fteam-ci-cd
