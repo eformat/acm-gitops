@@ -7,7 +7,7 @@ placementBindingDefaults:
   name: argocd-teams
 policyDefaults:
   placement:
-    placementName: placement-all-openshift
+    placementName: placement-team-argo
   categories:
     - CM Configuration Management
   complianceType: "musthave"
