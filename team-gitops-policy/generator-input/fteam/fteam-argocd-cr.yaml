@@ -86,7 +86,7 @@ spec:
     volumes:
       - emptyDir: {}
         name: custom-tools
-  version: v2.5.9
+  version: v2.5.11
   configManagementPlugins: |
     - name: argocd-vault-plugin
       generate:

@@ -51,6 +51,7 @@ metadata:
   name: global-policy
   namespace: open-cluster-management-global-set
 spec:
+  version: v2.5.11
   # This enables the application set controller
   applicationSet: {}
   # This enables the ArgoCD instance to use OpenShift OAuth
