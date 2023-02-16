@@ -21,6 +21,7 @@ policyDefaults:
   severity: medium
   standards:
     - generic
+  policyAnnotations: {"argocd.argoproj.io/compare-options": "IgnoreExtraneous"}
 policies:
   - name: fteam-gitops
     manifests:
