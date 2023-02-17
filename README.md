@@ -1,4 +1,6 @@
 # ACM GitOps
+
+[![ACM Team ArgoCD](http://img.youtube.com/vi/eGxPMkADAbc/0.jpg)](http://www.youtube.com/watch?v=eGxPMkADAbc "ACM Team ArgoCD")
 ## Quickly deploying ArgoCD ApplicationSets using RHACM's global-clusterset
 
 A demonstration of deploying team based ArgoCD instances using RHACM's global 'ClusterSet'.
@@ -99,5 +101,3 @@ To delete them, remove the `AppSet`
 ```bash
 oc delete appset team-argo
 ```
-
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/eGxPMkADAbc/0.jpg)](http://www.youtube.com/watch?v=eGxPMkADAbc "ACM Team ArgoCD")
