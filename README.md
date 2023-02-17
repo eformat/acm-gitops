@@ -100,3 +100,4 @@ To delete them, remove the `AppSet`
 oc delete appset team-argo
 ```
 
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/eGxPMkADAbc/0.jpg)](http://www.youtube.com/watch?v=eGxPMkADAbc "ACM Team ArgoCD")
