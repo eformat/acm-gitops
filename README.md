@@ -3,9 +3,9 @@
 [![ACM Team ArgoCD](http://img.youtube.com/vi/eGxPMkADAbc/0.jpg)](http://www.youtube.com/watch?v=eGxPMkADAbc "ACM Team ArgoCD")
 ## Quickly deploying ArgoCD ApplicationSets using RHACM's global-clusterset
 
-A demonstration of deploying team based ArgoCD instances using RHACM's global 'ClusterSet'.
+A demonstration of deploying Team Based ArgoCD instances using RHACM's global `ClusterSet` and `PolicyGenerator`.
 
-Out of the box there are serveral resources already deployed when you install ACM [you can read about them here](https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_management_for_kubernetes/2.6/html-single/multicluster_engine/index#managedclustersets_global) in the documentation.
+Out of the box there are several resources already deployed when you install ACM [you can read about them here](https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_management_for_kubernetes/2.6/html-single/multicluster_engine/index#managedclustersets_global) in the documentation.
 
 There is a namespace called `open-cluster-management-global-set` with a global object and binding.
 
@@ -45,6 +45,8 @@ kustomizeBuildOptions: --enable-alpha-plugins
 ```
 
 ## Deploy Team Based ArgoCD using Generated Policy
+
+We are going to deploy ArgoCD for two teams now using the ACM `PolicyGenerator`.
 
 The `PolicyGenerator` runs using kustomize. We specify the `generator-input/` folder - that holds our YAML manifests for each ArgoCD - in this case one for `fteam`, one for `zteam`.
 
