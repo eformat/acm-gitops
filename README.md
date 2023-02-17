@@ -16,7 +16,7 @@ oc get ManagedClusterSetBinding global -n open-cluster-management-global-set -oy
 
 ## Bootstrap a Cluster Scoped ArgoCD for our Policies
 
-We are going Bootstrap a custer-scoped ArgoCD instance into the `open-cluster-management-global-set` namespace. We will deploy our Team ArgoCD's using ACM `Policy` that is generated using the `PolicyGenerator` [tool - the reference file is here](https://github.com/stolostron/policy-generator-plugin/blob/main/docs/policygenerator-reference.yaml).
+We are going Bootstrap a cluster-scoped ArgoCD instance into the `open-cluster-management-global-set` namespace. We will deploy our Team ArgoCD's using ACM `Policy` that is generated using the `PolicyGenerator` [tool - the reference file is here](https://github.com/stolostron/policy-generator-plugin/blob/main/docs/policygenerator-reference.yaml).
 
 ```bash
 oc apply -f bootstrap-acm-global-gitops/setup.yaml
