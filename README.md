@@ -102,7 +102,7 @@ To delete them, remove the `AppSet`
 oc delete appset team-argo
 ```
 
-# For the impatient
+# 🤠 For the impatient
 
 - Install RHACM Operator 2.6/2.7+ into your OpenShift4 cluster
 - Label you local cluster with `useglobal=true` and `teamargo=true`
