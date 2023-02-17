@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: fteam
+  name: team-argo
   namespace: open-cluster-management-global-set
 spec:
   goTemplate: true
@@ -17,14 +17,14 @@ spec:
     preserveResourcesOnDeletion: false
   template:
     metadata:
-      name: fteam-{{.name}}
+      name: {{.teamName}}-{{.name}}
       annotations:
         argocd.argoproj.io/compare-options: IgnoreExtraneous
     spec:
       project: default
       destination:
         server: "{{.server}}"
-        namespace: fteam-ci-cd
+        namespace: open-cluster-management-global-set
       source:
         repoURL: https://github.com/eformat/acm-gitops.git
         path: team-gitops-policy
