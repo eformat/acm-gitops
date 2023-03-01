@@ -98,7 +98,7 @@ To create our Team ArgoCD's run:
 oc apply -f applicationsets/team-argo-appset.yaml
 ```
 
-To delete them, remove the `AppSet`
+To delete them, remove the `AppSet` or remove the `teamargo=true` label from the cluster.
 
 ```bash
 oc delete appset team-argo
